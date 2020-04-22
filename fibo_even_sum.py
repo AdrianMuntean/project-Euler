@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-def fiboEvenSum(n):
+def fibo_even_sum(n):
     sum = 0
     current_fib = 1
     prev_fib1 = 1
@@ -14,4 +14,4 @@ def fiboEvenSum(n):
     
     return sum
 
-print(fiboEvenSum(4000000))
+print(fibo_even_sum(4000000))
