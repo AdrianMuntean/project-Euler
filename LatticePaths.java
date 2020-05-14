@@ -1,15 +1,12 @@
 import java.math.BigInteger;
 
 public class LatticePaths {
-    static final int LEFT = 0;
-    static final int DOWN = 1;
-
     long noPaths = 0;
 
     /*
     Simple solution with backtracking, but it's taking way too much time
     */
-    void latticePathsWithDir(int gridSize, int dir, int indexI, int indexJ) {
+    void latticePathsWithDir(int gridSize, int indexI, int indexJ) {
         if (indexI > gridSize || indexJ > gridSize) {
             return;
         }
@@ -19,13 +16,13 @@ public class LatticePaths {
             return;
         }
 
-        latticePathsWithDir(gridSize, LEFT, indexI + 1, indexJ);
-        latticePathsWithDir(gridSize, DOWN, indexI, indexJ + 1);
+        latticePathsWithDir(gridSize, indexI + 1, indexJ); // LEFT
+        latticePathsWithDir(gridSize, indexI, indexJ + 1); // DOWN
 
     }
 
     void latticePaths(int gridSize) {
-        latticePathsWithDir(gridSize, LEFT, 0, 0);
+        latticePathsWithDir(gridSize, 0, 0);
         return;
     }
 
