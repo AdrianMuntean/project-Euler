@@ -2,7 +2,7 @@ import java.math.BigInteger;
 
 public class PowerDigitSum {
 
-    int powerDigitSum(int n) {
+    int compute(int n) {
         BigInteger number = BigInteger.TWO.pow(n);
         int sum = 0;
         while (number.compareTo(BigInteger.ZERO) > 0 ) {
@@ -14,7 +14,6 @@ public class PowerDigitSum {
     }
 
     public static void main(String[] args) {
-        PowerDigitSum latticePaths = new PowerDigitSum();
-        System.out.println(latticePaths.powerDigitSum(1000));
+        System.out.println(new PowerDigitSum().compute(1000));
     }
 }
