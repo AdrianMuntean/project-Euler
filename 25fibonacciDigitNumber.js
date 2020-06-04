@@ -18,5 +18,5 @@ const digitFibonacci = (noDigit) => {
   }
 }
 
-console.log(digitFibonacci(20));
+console.log(digitFibonacci(1000)); // 4782
 
