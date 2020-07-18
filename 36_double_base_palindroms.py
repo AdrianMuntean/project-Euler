@@ -17,7 +17,7 @@ def is_palindrom(number_arr):
 
 def double_base_palindroms():
     sum = 0
-    for number in range(1, 10 ** 6):
+    for number in range(1, 10 ** 6, 2):
         if is_palindrom([int(x) for x in str(number)]) and is_palindrom(binary(number)):
             sum += number
 
