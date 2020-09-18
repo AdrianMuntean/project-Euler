@@ -11,7 +11,7 @@ def pentagonal(x):
     
     p = int(x * (3 * x - 1) / 2)
     pent[x] = p
-    pent_values[p] = True
+    pent_values[p] = x
     return p
 
 def is_pentagonal(x):
@@ -23,18 +23,24 @@ def is_pentagonal(x):
     return (n_floor * (3 * n_floor - 1) / 2 == x) or (n_round * (3 * n_round - 1) / 2 == x)
 
 
+def try_find_petagonal_indexes(x):
+    for i in pent.keys():
+        value = pent_values.get(x - pent[i])
+        if value and value != i:
+            return (pent[i], pent[value])
+
+    return (None, None)
+
 def pentagon_numbers():
     d = 10**6
     for i in range(1, 10**7):
-        for j in range(i + 1, 10**7):
-            p1 = pentagonal(i)
-            p2 = pentagonal(j)
-
-            if is_pentagonal(p1 + p2) and is_pentagonal(abs(p1 - p2)):
-                diff = abs(p1 - p2)
-                if diff < d:
-                    d = diff
-                    print(f'found one : {d}')
+        pent_number_sum = pentagonal(i)
+        (a, b) = try_find_petagonal_indexes(pent_number_sum)
+        if a and b:
+            # print(f'{a} and {b} have the sum penta')
+            diff = abs(a - b)
+            if is_pentagonal(diff):
+                print(a, b)
         
     return d
 
