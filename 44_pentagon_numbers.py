@@ -34,13 +34,11 @@ def pentagon_numbers():
     for i in range(10**3, 10**5):
         pent_number_sum = pentagonal(i)
         pairs = find_all_petagonal_indexes(pent_number_sum)
-        for p in pairs:
-            (a, b) = p
+        for (a, b) in pairs:
             diff = abs(a - b)
-            if is_pentagonal(diff):
-                if d < diff:
-                    d = diff
-                    print(diff)
+            if is_pentagonal(diff) and d < diff:
+                d = diff
+                print(diff)
 
     return d
 
