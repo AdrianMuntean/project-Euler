@@ -3,11 +3,8 @@ import math
 sqrt_2 = math.sqrt(2)
 
 
-def is_pentagonal(x):
-    n_floor = math.floor((math.sqrt(3) * math.sqrt(x * 2 + 1 // 12) + 0.5) / 3)
-    n_round = math.ceil((math.sqrt(3) * math.sqrt(x * 2 + 1 // 12) + 0.5) / 3)
-
-    return (n_floor * (3 * n_floor - 1) / 2 == x) or (n_round * (3 * n_round - 1) / 2 == x)
+def pentagonal(x):
+    return int(x * (3 * x - 1) / 2)
 
 
 def is_hexagonal(x):
@@ -18,16 +15,15 @@ def is_hexagonal(x):
     return (n_floor * (2 * n_floor - 1) == x) or (n_round * (2 * n_round - 1) == x)
 
 
-def triangle(x):
-    return int(x * (x + 1) / 2)
-
-
 def next_tri_penta_hexa():
+    """
+    We can safely ignore the triangle numbers cause all the pentagon numbers are also triangle numbers
+    """
     index = 285
     while True:
         index += 1
-        number = triangle(index)
-        if is_pentagonal(number) and is_hexagonal(number):
+        number = pentagonal(index)
+        if is_hexagonal(number):
             return number
 
 
