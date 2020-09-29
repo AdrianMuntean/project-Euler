@@ -43,8 +43,7 @@ def smallest_odd_composite():
         index += 2
         if not is_prime(index):
             if not check_conjecture(index):
-                print(index)
-                return
+                return index
 
 
-print(smallest_odd_composite())  # 1533776805
+print(smallest_odd_composite())  # 5777
