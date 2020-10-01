@@ -5,7 +5,7 @@ already_found_number = 1487
 
 def is_prime(n):
     d = 3
-    while n // d > math.sqrt(n):
+    while n // d >= math.sqrt(n):
         if n % d == 0:
             return False
         d += 2
