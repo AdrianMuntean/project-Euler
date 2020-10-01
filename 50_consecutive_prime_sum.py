@@ -1,6 +1,19 @@
 import math
 
 
+def is_prime(n):
+    if n % 2 == 0:
+        return False
+
+    d = 3
+    while n // d >= math.sqrt(n):
+        if n % d == 0:
+            return False
+        d += 2
+
+    return True
+
+
 def sieve(n):
     primes = {i: True for i in range(2, n)}
     for i in range(2, int(math.sqrt(n) + 1)):
@@ -11,33 +24,35 @@ def sieve(n):
     return primes
 
 
-def find_largest_consecutive(primes):
-    largest = 0
-    largest_prime = 0
-    for k in primes.keys():
-        for k2 in primes.keys():
-            diff = k
-            largest_for_this = 0
-            for k3 in primes.keys():
-                if k2 > k3:
-                    continue
+def find_largest_consecutive_2(primes, n):
+    """
+    Iterate over the keys and compute the sum for each one
+    """
+    largest_count = 0
+    largest_sum = 0
 
-                diff = diff - k3
-                largest_for_this += 1
+    keys = list(primes.keys())
+    for k in range(0, len(keys)):
+        sum = keys[k]
+        count = 1
 
-                if diff <= 0:
-                    break
+        for x in range(k + 1, len(keys)):
+            if keys[x] + sum > n:
+                break
 
-            if diff == 0 and largest_for_this > largest:
-                largest = largest_for_this
-                largest_prime = k
+            sum += keys[x]
+            count += 1
 
-    return largest_prime
+            if count > largest_count and is_prime(sum):
+                largest_sum = sum
+                largest_count = count
+
+    return largest_sum
 
 
 def consecutive_prime_sum(n):
     primes = sieve(n)
-    return find_largest_consecutive(primes)
+    return find_largest_consecutive_2(primes, n)
 
 
-print(consecutive_prime_sum(1000))
+print(consecutive_prime_sum(1000000))  # 997651
