@@ -1,19 +1,6 @@
 import math
 
 
-def is_prime(n):
-    if n % 2 == 0:
-        return False
-
-    d = 3
-    while n // d >= math.sqrt(n):
-        if n % d == 0:
-            return False
-        d += 2
-
-    return True
-
-
 def sieve(n):
     primes = {i: True for i in range(2, n)}
     for i in range(2, int(math.sqrt(n) + 1)):
@@ -43,7 +30,7 @@ def find_largest_consecutive_2(primes, n):
             sum += keys[x]
             count += 1
 
-            if count > largest_count and is_prime(sum):
+            if count > largest_count and primes.get(sum):
                 largest_sum = sum
                 largest_count = count
 
