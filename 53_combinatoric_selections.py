@@ -35,4 +35,4 @@ def combinatoric_selections():
     return count
 
 
-print(combinatoric_selections())
+print(combinatoric_selections())  # 4075
