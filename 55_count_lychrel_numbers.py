@@ -51,7 +51,7 @@ def count_lychrel_numbers():
 
 print(count_lychrel_numbers())  # 249
 
-## better and improved versiondef reverse(number):
+## better and improved version
 
 def reverse(number): return int( str(number)[::-1] )
 
