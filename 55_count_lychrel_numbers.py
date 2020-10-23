@@ -12,7 +12,7 @@ def is_palindrome(number):
     return True
 
 
-def get_reverse(number):
+def reverse(number):
     if number_reverse1.get(number):
         return number_reverse1.get(number)
 
@@ -32,13 +32,9 @@ def get_reverse(number):
 
 
 def is_lychrel(number):
-    iterations = 0
-    new_number = number
-    while iterations <= 50:
-        reverse = get_reverse(new_number)
-        new_number += reverse
-        iterations += 1
-        if is_palindrome(new_number):
+    for i in range(50):
+        number += reverse(number)
+        if is_palindrome(number):
             return False
 
     return True
@@ -54,3 +50,16 @@ def count_lychrel_numbers():
 
 
 print(count_lychrel_numbers())  # 249
+
+## better and improved versiondef reverse(number):
+
+def reverse(number): return int( str(number)[::-1] )
+
+def is_lychrel(number):
+    for i in range(50):
+        number += reverse(number)
+        if number==reverse(number): 
+            return 0
+    return 1
+
+print(sum(is_lychrel(number) for number in range(10**4)))
