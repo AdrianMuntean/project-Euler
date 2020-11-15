@@ -129,4 +129,5 @@ def prime_pair_set():
                 return sum(list_of_combinable)
 
 
+#  takes around 2 minutes, need to improve this
 print(prime_pair_set())  # 26033 is the sum of [5197, 13, 5701, 6733, 8389]
