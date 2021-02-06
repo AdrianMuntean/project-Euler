@@ -1,4 +1,5 @@
 # Need to revisit this problem, not really original code :|
+# https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
 import math
 import itertools
 
