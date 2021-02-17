@@ -1,23 +1,14 @@
-name: Pull Request Labeler
+name: Pull request sorter
 
 on:
   pull_request:
     branches: [ master ]
 
 jobs:
-  labeler:
+  addLabels:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Run Labeler
-        if: success()
-        uses: crazy-max/ghaction-github-labeler@v3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          yaml-file: .github/labels.yml
-          skip-delete: false
-          dry-run: false
-          exclude: |
-            help*
-            *issue
+    - uses: actions/labeler@v2
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        configuration-path: .github/labeler.yml
