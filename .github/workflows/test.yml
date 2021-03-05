@@ -9,15 +9,19 @@ jobs:
     steps:
       - name: Wait for build to suceed
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: test
+        id: wait-for-labels
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: addLabels
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Do something if a new label is added
-        if: steps.test.outputs.conclusion == 'success' && contains(github.event.pull_request.labels.*.name, 'nestedDir')
-        run: echo Hello, world! 
-
-      - name: Run a one-line script
-        run: echo Hello, world!
+        if: steps.wait-for-labels.outputs.conclusion == 'success' && contains(github.event.pull_request.labels.*.name, 'nestedDir')
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: |
+            **Hello**
+            🌏
+            !
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login: 'github-actions[bot]'
