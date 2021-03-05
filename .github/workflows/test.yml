@@ -1,8 +1,7 @@
 name: Test conditional flows
 
 on:
-  pull_request:
-    branches: [ master ]
+  pull_request
 
 jobs:
   testFlow:
