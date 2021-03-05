@@ -1,0 +1,20 @@
+name: Test conditional flows
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  testFlow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for build to suceed
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: test
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: addLabels
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Do something with a passing build
+        if: steps.wait-for-build.outputs.conclusion == 'success'
