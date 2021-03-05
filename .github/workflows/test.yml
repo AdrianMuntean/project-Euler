@@ -16,12 +16,10 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Do something if a new label is added
-        if: steps.wait-for-labels.outputs.conclusion == 'success' && contains(github.event.pull_request.labels.*.name, 'nestedDir')
+        if: steps.wait-for-labels.outputs.conclusion == 'success' && contains(github.event.pull_request.labels.*.name, 'nestedDir2')
         uses: mshick/add-pr-comment@v1
         with:
           message: |
-            **Hello**
-            🌏
-            !
+            Sweet! 🍬
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
