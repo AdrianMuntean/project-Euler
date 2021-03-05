@@ -1,0 +1,25 @@
+name: Test conditional flows
+
+on:
+  pull_request
+
+jobs:
+  testFlow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for build to suceed
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-labels
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: addLabels
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Do something if a new label is added
+        if: steps.wait-for-labels.outputs.conclusion == 'success' && contains(github.event.pull_request.labels.*.name, 'nestedDir')
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: |
+            Sweet! 🍬
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login: 'github-actions[bot]'

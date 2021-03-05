@@ -1,3 +1,4 @@
 root: ./*
 example: examples/**/*
-repository: packages/repository/*
+nestedDir: '**/test2/**'
+anotherExample: '**/+(dev|development)/**'
