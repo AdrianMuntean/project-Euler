@@ -31,7 +31,7 @@ jobs:
         uses: mshick/add-pr-comment@v1
         with:
           message: |
-            Nice work, problem [#${{env.problem_no}}](https://projecteuler.net/problem=${{env.problem_no}) solved! 👨‍💻 ✅
+            Nice work, problem #${{env.problem_no}} solved! 👨‍💻 ✅
 
             `Still` ${{env.problems_left}} to go. 
 
