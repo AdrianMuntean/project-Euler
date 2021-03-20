@@ -18,7 +18,7 @@ jobs:
             echo "Do something with this ${added_modified_file}."
             if [[ ${added_modified_file} =~ ^([1-9]{2}).+\.[a-z]{2}$ ]]; then
               echo "problem_no=${BASH_REMATCH[1]}" >> $GITHUB_ENV
-              echo "problems_left=$((100-$problem_no))"
+              echo "problems_left=$((100-$problem_no))" >> $GITHUB_ENV
             fi
           done
           echo "size = ${#added_modified_files[@]}"
@@ -32,7 +32,7 @@ jobs:
         uses: mshick/add-pr-comment@v1
         with:
           message: |
-            Nice work, problem #${{env.problem_no}} [solved](https://projecteuler.net/problem=${{env.problem_no}})! 👨‍💻 ✅
+            Nice work, problem #${{env.problem_no}} solved. Pick next from [Project Euler](https://projecteuler.net)! 👨‍💻 ✅
 
             `Still` ${{env.problems_left}} to go. 
 
