@@ -17,3 +17,4 @@ jobs:
           for added_modified_file in "${added_modified_files[@]}"; do
             echo "Do something with this ${added_modified_file}."
           done
+          echo "size = ${#added_modified_files[@]}"
