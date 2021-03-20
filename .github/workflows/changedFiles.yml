@@ -25,3 +25,12 @@ jobs:
       - run: |
           echo "${{ env.action_state }}"
           echo "${{ env.problem_no }}"
+      - name: Post a message with the remaining problems
+        if: env.problem_no
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: |
+            Message!
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login: 'github-actions[bot]'
+
