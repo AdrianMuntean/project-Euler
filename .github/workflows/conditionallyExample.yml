@@ -4,7 +4,7 @@ on:
   pull_request
 
 jobs:
-  testFlow:
+  commentIfCondition:
     runs-on: ubuntu-latest
     steps:
       - name: Wait for build to suceed
