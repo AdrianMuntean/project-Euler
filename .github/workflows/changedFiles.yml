@@ -30,7 +30,7 @@ jobs:
         uses: mshick/add-pr-comment@v1
         with:
           message: |
-            Message!
+            Message ${{ env.action_state }}!
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
 
