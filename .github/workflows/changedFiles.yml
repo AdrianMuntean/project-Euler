@@ -18,6 +18,7 @@ jobs:
             echo "Do something with this ${added_modified_file}."
             if [[ ${added_modified_file} =~ ^([1-9]{2}).+\.[a-z]{2}$ ]]; then
               echo "problem_no=${BASH_REMATCH[1]}" >> $GITHUB_ENV
+              echo "problems_left=$((100-${BASH_REMATCH[1]}))"
             fi
           done
           echo "size = ${#added_modified_files[@]}"
@@ -31,6 +32,8 @@ jobs:
         with:
           message: |
             Nice work, problem [#${{env.problem_no}}](https://projecteuler.net/problem=${{env.problem_no}) solved! 👨‍💻 ✅
+
+            `Still` ${{env.problems_left}} to go. 
 
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
