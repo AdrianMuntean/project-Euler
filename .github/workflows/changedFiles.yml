@@ -16,7 +16,7 @@ jobs:
           mapfile -d ',' -t added_modified_files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
           for added_modified_file in "${added_modified_files[@]}"; do
             echo "Do something with this ${added_modified_file}."
-            if [[ ${added_modified_file} =~ ^([1-9]{2}).+\.[a-z]{2}$ ]];
+            if [[ ${added_modified_file} =~ ^([1-9]{2}).+\.[a-z]{2}$ ]]; then
               echo "problem_no=${BASH_REMATCH[1]}" >> $GITHUB_ENV
             fi
           done
