@@ -20,10 +20,6 @@ jobs:
               echo "problems_left=$((100-${BASH_REMATCH[1]}))" >> $GITHUB_ENV
             fi
           done
-      - run: |
-          echo "${{ env.action_state }}"
-          echo "${{ env.problem_no }}"
-          echo "${{ env.problems_left }}"
       - name: Post a message with the remaining problems
         if: env.problem_no
         uses: mshick/add-pr-comment@v1
