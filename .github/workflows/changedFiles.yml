@@ -17,7 +17,7 @@ jobs:
           for added_modified_file in "${added_modified_files[@]}"; do
             if [[ ${added_modified_file} =~ ^([1-9]{2}).+\.[a-z]{2}$ ]]; then
               echo "problem_no=${BASH_REMATCH[1]}" >> $GITHUB_ENV
-              echo "problems_left=$((100-$BASH_REMATCH[1]))" >> $GITHUB_ENV
+              echo "problems_left=$((100-${BASH_REMATCH[1]}))" >> $GITHUB_ENV
             fi
           done
       - run: |
