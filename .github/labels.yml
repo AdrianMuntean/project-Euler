@@ -13,3 +13,6 @@
   color: "000000"
   description: "This will not be worked on"
   from_name: "wontfix"
+- name: "WIP"
+  color: "bada55"
+  description: "This is still in progress"
