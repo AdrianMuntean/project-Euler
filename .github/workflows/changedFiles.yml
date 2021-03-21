@@ -31,7 +31,7 @@ jobs:
           message: |
             Nice work, problem #${{env.problem_no}} solved. Pick next from [Project Euler](https://projecteuler.net)! 👨‍💻 ✅
 
-            `Still` ${{env.problems_left}} to go. 
+            Still `${{env.problems_left}}` to go. 
 
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
