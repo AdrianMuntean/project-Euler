@@ -4,16 +4,39 @@
 #       I
 #       ()
 
-pos_gen = [(0, 0), (0, 1), (0, 2), (1, 1), (1, 2), (2, 1)]
-pos = [(0, 0), (0, 1), (0, 2), (1, 2), (0, 2), (1, 1), (2, 1), (1, 1), (0, 1)]
+pos_gen = [
+    (1, 0),
+    (1, 1),
+    (1, 2),
+    (0, 2),
+    (2, 1),
+    (2, 2),
+    (3, 1),
+    (3, 2),
+    (3, 0),
+    (2, 0),
+]
+pos = [
+    (1, 0),
+    (1, 1),
+    (1, 2),
+    (0, 2),
+    (1, 2),
+    (2, 1),
+    (2, 2),
+    (2, 1),
+    (3, 1),
+    (3, 2),
+    (3, 1),
+    (3, 0),
+    (2, 0),
+    (3, 0),
+    (1, 1),
+]
 sols = set()
 
 
 def is_valid(arr):
-    flat_list = [item for sublist in arr for item in sublist]
-    for j in range(1, 7):
-        if flat_list.count(j) > 1:
-            return False
     p_sum = 0
     sum = 0
     for i, p in enumerate(pos):
@@ -41,17 +64,23 @@ def pretty_print(array):
 def store_solution(array):
     store = []
     sv = ""
-    a = array[0][0]
-    b = array[1][2]
-    c = array[2][1]
+    a = array[1][0]
+    b = array[0][2]
+    c = array[2][2]
+    d = array[3][2]
+    e = array[2][0]
     s = 0
-    m = min([a, b, c])
+    m = min([a, b, c, d, e])
     if m == a:
         s = 0
     if m == b:
         s = 3
     if m == c:
         s = 6
+    if m == d:
+        s = 9
+    if m == e:
+        s = 12
 
     for i in range(s, s + len(pos)):
         p = pos[i % len(pos)]
@@ -65,20 +94,23 @@ def store_solution(array):
     sols.add(string_sol)
 
 
+def available_digits(array, c_pos):
+    existing_digits = []
+    for p in pos:
+        if p == c_pos:
+            break
+        existing_digits.append(array[p[0]][p[1]])
+    return [item for item in range(1, 11) if item not in existing_digits]
+
+
 def gen_ring(j, array=[[], [], []]):
     if j >= len(pos_gen):
         if is_valid(array):
             store_solution(array)
-            # pretty_print(array)
-        else:
-            # print("not valid")
-            # print(array)
-            pass
+            pretty_print(array)
         return
     c_pos = pos_gen[j]
-    for i in range(1, 7):
-        # if i in array[0] or i in array[1] or i in array[2]:
-        #     continue
+    for i in available_digits(array, c_pos):
         array[c_pos[0]][c_pos[1]] = i
         gen_ring(
             j + 1,
@@ -87,25 +119,20 @@ def gen_ring(j, array=[[], [], []]):
 
 
 def compute_ring():
-    arr = [[None] * 3 for i in range(3)]
-    for i, p in enumerate(pos_gen):
+    arr = [[None] * 3 for _ in range(4)]
+    for i, _ in enumerate(pos_gen):
         gen_ring(i, arr)
-        # if is_valid(arr):
-        #     print(arr)
-        #     print("is valid")
-        # else:
-        #     print("not valid")
 
 
 def biggest_solution():
     largest = 0
     for i in sols:
-        if int(i) > largest:
+        if int(i) // 10 ** (len(i) - 5) > largest // 10 ** (len(str(largest)) - 5):
             largest = int(i)
 
     print(largest)
 
 
 compute_ring()
-print(biggest_solution())
-# print(is_valid([[4, 6, 8], [None, 7, 3], [None, 5, None]]))
+print(biggest_solution())  # 6531031914842725
+# print(is_valid([[None, None, 10], [6, 5, 3], [7, 1, 9], [2, 4, 8]]))
