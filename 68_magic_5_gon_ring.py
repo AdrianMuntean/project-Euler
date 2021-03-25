@@ -4,6 +4,7 @@
 #       I
 #       ()
 
+## array with positions
 pos_gen = [
     (1, 0),
     (1, 1),
@@ -16,6 +17,7 @@ pos_gen = [
     (3, 0),
     (2, 0),
 ]
+## array with the directions
 pos = [
     (1, 0),
     (1, 1),
@@ -33,6 +35,8 @@ pos = [
     (3, 0),
     (1, 1),
 ]
+
+## store the solutions as a string in a set
 sols = set()
 
 
@@ -56,7 +60,8 @@ def is_valid(arr):
 def pretty_print(array):
     s = ""
     for p in pos:
-        s = f"{s},{array[p[0]][p[1]]}"
+        separator = "" if len(s) == 0 else ","
+        s = f"{s}{separator}{array[p[0]][p[1]]}"
 
     print(s)
 
@@ -70,6 +75,7 @@ def store_solution(array):
     d = array[3][2]
     e = array[2][0]
     s = 0
+
     m = min([a, b, c, d, e])
     if m == a:
         s = 0
@@ -125,12 +131,13 @@ def compute_ring():
 
 
 def biggest_solution():
-    largest = 0
+    largest = ""
     for i in sols:
-        if int(i) // 10 ** (len(i) - 5) > largest // 10 ** (len(str(largest)) - 5):
-            largest = int(i)
-
-    print(largest)
+        ## Due to the fact that some number can contain the number 10 multiple times
+        ## they have different length. Therefore, compare strings
+        if i > largest:
+            largest = i
+    return largest
 
 
 compute_ring()
