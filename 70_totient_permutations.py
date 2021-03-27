@@ -58,14 +58,11 @@ def is_permutation(n, m):
     return sorted_m == sorted_n
 
 
-def totient_min(n, primes):
+def get_totient_min(n, primes):
     smallest = 10 ** 5  # just a large number
     smallest_number = 0
     for i in range(2, n + 1):
         p = phi(i, primes)
-
-        if i % 10 ** 5 == 0:
-            print(i)
         if not is_permutation(i, p):
             continue
         if smallest > (i / p):
@@ -79,10 +76,10 @@ def totient_min(n):
     1. Basically, re-use lots of problem #69
     2. Just add a check for permutation
 
-    runs in 5s
+    runs in 134.50s, which is a bit slow, but works for now
     """
     primes = sieve(n)
-    return totient_min(n, primes)
+    return get_totient_min(n, primes)
 
 
 print(totient_min(10 ** 7))  # 8319823
