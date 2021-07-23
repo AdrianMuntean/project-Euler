@@ -1,7 +1,7 @@
 """
-Since we know that we need to search near 3/7 we can define the search range from 0.4285 to 3/7. 
-1. The solution is not 100% generic, since it has the range selectors tailored to search near 3/7
-2. It computes in little over a minute, can still be improved :)
+Since we know that we need to search near 3/7 we can define the search range from 0.4285714 to 3/7. 
+1. The solution is not 100% generic, since it has the range selectors tailored to search near 3/7. Could be extended to be a generic solution
+2. It computes in around 14 seconds
 """
 import math
 
@@ -34,11 +34,11 @@ def order_fraction(a, upper_limit):
     fraction = a[0] / a[1]
     reduced_proper_fractions = []
     for d in range(1, upper_limit + 1):
-        n_start = int(0.4285 * d)
+        n_start = int(0.4285714 * d)
         n_end = int(fraction * d)
+        if n_start == 0:
+            continue
         for n in range(n_start, n_end + 1):
-            if n == 0:
-                continue
             div = n / d
             if div >= fraction:
                 skipped += 1
