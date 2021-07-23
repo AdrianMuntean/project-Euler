@@ -1,3 +1,8 @@
+"""
+Since we know that we need to search near 3/7 we can define the search range from 0.4285 to 3/7. 
+1. The solution is not 100% generic, since it has the range selectors tailored to search near 3/7
+2. It computes in little over a minute, can still be improved :)
+"""
 import math
 
 factors_of = {}
@@ -25,24 +30,32 @@ def prime_btw_them(n, d):
 
 
 def order_fraction(a, upper_limit):
+    skipped = 0
     fraction = a[0] / a[1]
     reduced_proper_fractions = []
     for d in range(1, upper_limit + 1):
-        for n in range(1, d):
-            if n / d >= fraction:
+        n_start = int(0.4285 * d)
+        n_end = int(fraction * d)
+        for n in range(n_start, n_end + 1):
+            if n == 0:
                 continue
+            div = n / d
+            if div >= fraction:
+                skipped += 1
+                continue
+
             if prime_btw_them(n, d):
                 reduced_proper_fractions.append((n, d))
-                if d % 10000 == 0:
-                    print(n, d)
+    print(f"{skipped} skipped")
     return reduced_proper_fractions
 
 
 def just_before(a, d):
     fractions = order_fraction(a, d)
     fractions.sort(key=lambda x: x[0] / x[1])
-    return fractions[-1][0]
+    last_one = fractions[-1]
+    return last_one[0]
 
 
-print(just_before((3, 7), 10 ** 6))
-# print(just_before((3, 7), 8))
+# print(just_before((3, 7), 10 ** 2))
+print(just_before((3, 7), 10 ** 6))  # 428570
